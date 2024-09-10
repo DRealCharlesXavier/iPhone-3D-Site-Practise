@@ -28,7 +28,7 @@ function WebgiViewer() {
 
   const setupViewer = useCallback(async () => {
     // Initialize the viewer
-    const viewer = new ViewerApp({ 
+    const viewer = new ViewerApp({
       canvas: canvasRef.current,
     });
 
@@ -56,6 +56,8 @@ function WebgiViewer() {
 
     // Import and add a GLB file.
     await manager.addFromPath("scene-black.glb");
+
+    viewer.getPlugin(TonemapPlugin).config.clipBackground = True;
 
     // Load an environment map if not set in the glb file
     // await viewer.setEnvironmentMap("./assets/environment.hdr");
