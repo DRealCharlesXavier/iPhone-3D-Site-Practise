@@ -21,6 +21,8 @@ import {
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+gsap.registerPlugin(ScrollTrigger)
+
 function WebgiViewer() {
   const canvasRef = useRef(null);
 
@@ -37,7 +39,7 @@ function WebgiViewer() {
 
     await viewer.addPlugin(GBufferPlugin);
     await viewer.addPlugin(new ProgressivePlugin(32));
-    await viewer.addPlugin(new TonemapPlugin(!viewer.useRgbm));
+    await viewer.addPlugin(new TonemapPlugin(true));
     await viewer.addPlugin(GammaCorrectionPlugin);
     await viewer.addPlugin(SSRPlugin);
     await viewer.addPlugin(SSAOPlugin);
