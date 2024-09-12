@@ -31,6 +31,10 @@ function WebgiViewer() {
 
     const manager = await viewer.addPlugin(AssetManagerPlugin);
 
+    const camera = viewer.scene.activeCamera;
+    const position = camera.target;
+    const target = camera.target;
+
     await viewer.addPlugin(GBufferPlugin);
     await viewer.addPlugin(new ProgressivePlugin(32));
     await viewer.addPlugin(new TonemapPlugin(!viewer.useRgbm));
@@ -46,6 +50,17 @@ function WebgiViewer() {
     viewer.getPlugin(TonemapPlugin).config.clipBackground = true;
 
     viewer.scene.activeCamera.setCameraOptions({ controlsEnabled: false });
+
+    window.scrollTo(0, 0);
+
+    let needsUpdate = true;
+
+    viewer.addEventListener("preFrame", () => {
+      if (needsUpdate) {
+        camera.positionTargetUpdated(true);
+        needsUpdate = false;
+      }
+    });
   }, []);
 
   useEffect(() => {
