@@ -28,4 +28,4 @@ export const scrollAnimation = (position, target, onUpdate) => {
       immediateRender: false,
     },
   });
-}
+};
